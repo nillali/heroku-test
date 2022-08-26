@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/nillali/heroku-test/issues"
   },
-  "homepage": "https://github.com/nillali/heroku-test#readme"
+  "homepage": "https://github.com/nillali/heroku-test#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }
