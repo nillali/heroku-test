@@ -1,22 +1,22 @@
 const assert = require('assert')
 const db = require('./db')
 
-describe('Users', () => {
-    describe('#findUser()', () => {
+describe('Users', function () {
+    describe('#findUser()', function () {
         const id = 2
         const user = db.users.find(user => user.id === id)
-        it('Name of user should be Nilla when id is 2', () => {
+        it('Name of user should be Nilla when id is 2', function () {
             assert.equal(user.name, 'Nilla')
         })
     })
-    describe('#findUser()', () => {
+    describe('#findUser()', function () {
         const id = 3
         const user = db.users.find(user => user.id === 3)
-        it('Name of user should be Isabelle when id is 3', () => {
+        it('Name of user should be Isabelle when id is 3', function () {
             assert.equal(user.name, 'Isabelle')
         })
     })
-    describe('#authUser()', () => {
+    describe('#authUser()', function () {
         const login = { email: "johanna@mail.com", pwd: 123 }
         let id = null;
         const user = db.users.find(user => user.email === login.email)
@@ -24,11 +24,11 @@ describe('Users', () => {
             if (user.pwd === login.pwd)
                 id = 1
         }
-        it('Should set id to 1 when email is johanna@mail.com and pwd is 123', () => {
+        it('Should set id to 1 when email is johanna@mail.com and pwd is 123', function () {
             assert.equal(id, 1)
         })
     })
-    describe('#authUser()', () => {
+    describe('#authUser()', function () {
         const login = { email: "anna@mail.com", pwd: 901 }
         let id = null;
         const user = db.users.find(user => user.email === login.email)
@@ -36,7 +36,7 @@ describe('Users', () => {
             if (user.pwd === login.pwd)
                 id = 4
         }
-        it('Should set id to 4 when email is anna@mail.com and pwd is 901', () => {
+        it('Should set id to 4 when email is anna@mail.com and pwd is 901', function () {
             assert.equal(id, 4)
         })
     })
