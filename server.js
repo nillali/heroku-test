@@ -33,4 +33,5 @@ app.get('/user-name', (req, res) => {
             res.send(result.name)
         })
         .catch(err => console.log(err))
+    // res.send('server up and running');
 })
