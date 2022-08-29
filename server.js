@@ -18,12 +18,20 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 app.use(express.json());
 
-
 app.get('/', (req, res) => {
+    User.find()
+        .then(result => {
+            res.send(result)
+        })
+        .catch(err => console.log(err))
+    // res.send('server up and running');
+})
+
+app.get('/user-name', (req, res) => {
     User.findById('630c7c0587b93b3d0b16977e')
         .then(result => {
             res.send(result.name)
         })
         .catch(err => console.log(err))
     // res.send('server up and running');
-});
+})
