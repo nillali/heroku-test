@@ -1,8 +1,11 @@
-const express = require('express');
+const express = require('express')
 require('dotenv').config()
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+var cors = require('cors')
 const User = require('./models/user')
 const app = express();
+
+app.use(cors())
 
 const dbURI = process.env.dbURI
 
@@ -30,7 +33,7 @@ app.get('/', (req, res) => {
 app.get('/user-name', (req, res) => {
     User.findById('630c7c0587b93b3d0b16977e')
         .then(result => {
-            res.send(result.name)
+            res.send({ name: result.name })
         })
         .catch(err => console.log(err))
     // res.send('server up and running');
