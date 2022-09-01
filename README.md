@@ -10,7 +10,7 @@ touch .env
 npm install
 npm start
 ``` 
-Add this code to your .env file
+Add this code to your .env file:
 ```
 dbURI=<your MongoDB connection string>
 ``` 
