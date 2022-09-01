@@ -18,18 +18,12 @@ dbURI=<your MongoDB connection string>
 ``` 
 
 ### Tester  
-Unit test
 ```bash
 npm test # Unit test
+npm componenttest # Component test
+npm integrationtest # Integration test
 ```
-Component test
-```
-npm componenttest  
-```
-Integration test
-```
-npm integrationtest  
-``` 
+
 ### Docker
 ```bash
 docker build -t <image-name> .
