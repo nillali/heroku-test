@@ -4,7 +4,7 @@ This is the Backend repository for a school project to learn how to go from deve
 
 ## TTFHW - Instructions
 ### Backend developer
-```
+```bash
 cd <your-workspace>
 git clone https://github.com/nillali/heroku-test.git    
 cd heroku-test
@@ -31,7 +31,7 @@ Integration test
 npm integrationtest  
 ``` 
 ### Docker
-```
+```bash
 docker build -t <image-name> .
 docker run --name <container-name> <image-name>
 ```
