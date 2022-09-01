@@ -28,7 +28,7 @@ Integration test
 ```
 npm integrationtest  
 ``` 
-## JWSON - Instructions
+## JWT - Instructions
 ```mermaid
 sequenceDiagram
 	actor Client
