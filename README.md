@@ -54,5 +54,3 @@ sequenceDiagram
 	Note right of Server: Checks if header and payload matches signature of recieved JWT when encrypted with secret key.
 	Server->>Client: If authorized, sends back requested resource
 ```
-
-## Test
