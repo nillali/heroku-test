@@ -28,6 +28,10 @@ Integration test
 ```
 npm integrationtest  
 ``` 
+### Docker
+```
+docker build -t be-one-source .
+```
 ## JWT - Instructions
 ```mermaid
 sequenceDiagram
