@@ -1,4 +1,28 @@
-# company-page
+# One Source
+
+## TTFHW - Instructions
+### Backend developer
+```
+cd <your-workspace>
+git clone https://github.com/nillali/heroku-test.git    
+cd heroku-test
+npm install
+npm start
+``` 
+### Tester  
+Unit test
+```
+npm test  
+```
+Component test  
+```
+npm componenttest  
+```
+Integration test
+```
+npm integrationtest  
+``` 
+
 ```mermaid
 sequenceDiagram
 	actor Client
