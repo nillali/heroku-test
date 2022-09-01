@@ -20,9 +20,9 @@ dbURI=<your MongoDB connection string>
 ### Tester  
 Unit test
 ```
-npm test
+npm test # Unit test
 ```
-Component test  
+Component test
 ```
 npm componenttest  
 ```
