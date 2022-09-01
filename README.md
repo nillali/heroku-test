@@ -32,8 +32,8 @@ npm integrationtest
 ``` 
 ### Docker
 ```
-docker build -t be-one-source .
-docker run --name beOneSource_c be-one-source
+docker build -t <image-name> .
+docker run --name <container-name> <image-name>
 ```
 ## JWT - Instructions
 ```mermaid
