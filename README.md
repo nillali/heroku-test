@@ -1,4 +1,6 @@
-# One Source
+# One Source Backend
+
+This is the Backend repository for a school project to learn how to go from development to production with different environments and ci/cd pipeline. There is also a One Source Frontend repository which is connected to this one.
 
 ## TTFHW - Instructions
 ### Backend developer
