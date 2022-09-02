@@ -11,6 +11,8 @@ const dbURI = process.env.dbURI
 
 const PORT = process.env.PORT || 3000
 
+const userName = process.env.userName
+
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((res) => {
         app.listen(PORT, () => {
@@ -30,7 +32,7 @@ app.get('/', (req, res) => {
     // res.send('server up and running');
 })
 
-app.get('/user-name', (req, res) => {
+app.get(userName, (req, res) => {
     User.findById('630c7d2b87b93b3d0b16977f')
         .then(result => {
             res.send({ name: result.name })
