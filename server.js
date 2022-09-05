@@ -7,8 +7,8 @@ const app = express();
 
 app.use(cors())
 
-const dbURI = process.env.dbURI
-const PORT = process.env.PORT || 3000
+const dbURI = process.env.dbURI || 3000
+const PORT = process.env.PORT
 const userName = process.env.userName
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
