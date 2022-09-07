@@ -1,8 +1,10 @@
-# One Source
+# One Source Backend
+
+This is the Backend repository for a school project to learn how to go from development to production with different environments and ci/cd pipeline. There is also a One Source Frontend repository which is connected to this one.
 
 ## TTFHW - Instructions
 ### Backend developer
-```
+```bash
 cd <your-workspace>
 git clone https://github.com/nillali/heroku-test.git    
 cd heroku-test
@@ -16,36 +18,14 @@ dbURI=<your MongoDB connection string>
 ``` 
 
 ### Tester  
-Unit test
-```
-npm test
-```
-Component test  
-```
-npm componenttest  
-```
-Integration test
-```
-npm integrationtest  
-``` 
-## JWT - Instructions
-```mermaid
-sequenceDiagram
-	actor Client
-	participant Server
-	participant DB
-
-	Client->>Server: POST / sign in with username and password
-	Server->>DB: Authenticates username and password
-	DB->>Server: Returns requested data
-	Server->>Server: If authenticated, creates JWT
-	Note right of Server: JWT contains necessary user and token information, encrypted with secret key, only known by server.
-	Server->>Client: Sends back encrypted JWT
-	Note left of Client: Stores JWT<br>in browser.
-	Client->>Server: GET / requests resource with JWT in header
-	Server->>Server: Authorizes using JWT
-	Note right of Server: Checks if header and payload matches signature of recieved JWT when encrypted with secret key.
-	Server->>Client: If authorized, sends back requested resource
+```bash
+npm test # Unit test
+npm componenttest # Component test
+npm integrationtest # Integration test
 ```
 
-## Test
+### Docker
+```bash
+docker build -t <image-name> .
+docker run --name <container-name> <image-name>
+```
