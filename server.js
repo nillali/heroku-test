@@ -22,9 +22,14 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 app.use(express.json());
 
 app.get(userName, (req, res) => {
-    User.findById('63185fd41e3a39fe73af4c13')
+    User.find()
         .then(result => {
-            res.send({ name: result.name })
+            const user = result.find(element => element.email === 'johanna@mail.com')
+            if (user) {
+                res.send({ name: user.name })
+            } else {
+                res.send({ name: "Not found" })
+            }
         })
         .catch(err => console.log(err))
 })
