@@ -3,11 +3,14 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const cors = require('cors')
 const User = require('./models/user')
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerOptions = require('./swagger.json');
 const app = express();
 
 app.use(cors())
 
-const dbURI = process.env.dbURI 
+const dbURI = process.env.dbURI
 const PORT = process.env.PORT || 3000
 const userName = process.env.userName
 
@@ -21,6 +24,19 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 app.use(express.json());
 
+const swaggerDocument = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+/**
+ * @openapi
+ * /api/v0/user-name:
+ *   get:
+ *     description: Use to find a user
+ *     responses:
+ *       200:
+ *         description: A successfull response
+ */
+
 app.get(userName, (req, res) => {
     User.find()
         .then(result => {
@@ -32,4 +48,4 @@ app.get(userName, (req, res) => {
             }
         })
         .catch(err => console.log(err))
-})
+});
