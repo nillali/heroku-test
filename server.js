@@ -35,6 +35,26 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
  *     responses:
  *       200:
  *         description: A successfull response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 name:
+ *                   type: string
+ *                   description: Name of user
+ *                   example: Isabelle
+ *       401:
+ *         description: User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 name:
+ *                   type: boolean
+ *                   description: Is false if user does not exist
+ *                   example: false
  */
 
 app.get(userName, (req, res) => {
@@ -44,8 +64,10 @@ app.get(userName, (req, res) => {
             if (user) {
                 res.send({ name: user.name })
             } else {
-                res.send({ name: "Not found" })
+                res.status(401);
+                res.send({ name: false })
             }
         })
         .catch(err => console.log(err))
 });
+
