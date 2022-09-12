@@ -4,7 +4,13 @@
         "info": {
             "title": "OneSource Webservice REST API",
             "version": "1.0.0"
-        }
+        },
+        "tags": [
+            {
+                "name": "users",
+                "description": "Operations about the users"
+            }
+        ]
     },
     "apis": [
         "./server.js"
