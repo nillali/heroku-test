@@ -12,7 +12,7 @@ const app = express();
 app.use(cors())
 
 const dbURI = process.env.dbURI
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
 const userName = process.env.userName
 const allUsers = process.env.allUsers
 
@@ -118,7 +118,10 @@ app.get(userName, (req, res) => {
 app.get(allUsers, (req, res) => {
     User.find()
         .then((result) => {
-            res.send(result)
+            const employees = result.map(employee => ({
+                id: employee.id, name: employee.name, email: employee.email, phone: employee.phone
+            }))
+            res.send(employees)
         })
         .catch((err) => {
             console.log(err);
