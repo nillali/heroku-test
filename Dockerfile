@@ -1,7 +1,5 @@
 FROM node:18-alpine
 
-RUN npm install -g nodemon
-
 WORKDIR /app
 
 COPY package.json .
@@ -12,4 +10,4 @@ COPY . .
 
 EXPOSE 4050
 
-CMD ["npm", "run", "dev-docker"]
+CMD ["npm", "start"]

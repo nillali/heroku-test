@@ -14,7 +14,8 @@ app.use(cors())
 const dbURI = process.env.dbURI
 const PORT = process.env.PORT || 3001
 const userName = process.env.userName
-const allUsers = process.env.allUsers
+const authorizeUser = process.env.authorizeUser
+const registerUser = process.env.registerUser
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((res) => {
@@ -31,15 +32,15 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 /**
  * @openapi
- * /api/v0/user-name:
- *   get:
+ * /api/v0/authorize:
+ *   post:
  *     tags:
  *     - users
- *     summary: Retrieve the name of a single user
- *     description: Retrieve the name of a single user via their email
+ *     summary: Authorize user
+ *     description: Check if email and password provided by user matches
  *     responses:
  *       200:
- *         description: The user's name
+ *         description: The user's details
  *         content:
  *           application/json:
  *             schema:
@@ -49,32 +50,122 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
  *                   type: string
  *                   description: Name of user
  *                   example: Isabelle
+ *                 email:
+ *                   type: string
+ *                   description: Email to user
+ *                   example: isabelle@mail.com
+ *                 phone:
+ *                   type: string
+ *                   description: Phone number to user
+ *                   example: +46 123 789 78
+ *                 pwd:
+ *                   type: string
+ *                   description: Password to account
+ *                   example: SuperSecretPassword
+ *                 accessLevel:
+ *                   type: string
+ *                   description: Access level
+ *                   example: Developer
  *       401:
- *         description: User not found
+ *         description: Email not registred or does not match password
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: The error message
+ *                   example: Email not registered.
+ */
+
+app.post(authorizeUser, (req, res) => {
+    User.find()
+        .then(result => {
+            const user = result.find(element => element.email === req.body.email)
+            if (user) {
+                if (user.pwd === req.body.pwd) {
+                    res.send(user)
+                } else {
+                    res.status(401)
+                    res.send({ error: "Password and email do not match." })
+                }
+            } else {
+                res.status(401)
+                res.send({ error: "Email not registered." })
+            }
+        })
+        .catch(err => console.log(err))
+})
+
+
+/**
+ * @openapi
+ * /api/v0/register:
+ *   post:
+ *     tags:
+ *     - users
+ *     summary: Register user
+ *     description: Registers user to database
+ *     responses:
+ *       200:
+ *         description: The user's details
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
  *                 name:
- *                   type: boolean
- *                   description: Is false if user does not exist
- *                   example: false
+ *                   type: string
+ *                   description: Name of user
+ *                   example: Isabelle
+ *                 email:
+ *                   type: string
+ *                   description: Email to user
+ *                   example: isabelle@mail.com
+ *                 phone:
+ *                   type: string
+ *                   description: Phone number to user
+ *                   example: +46 123 789 78
+ *                 pwd:
+ *                   type: string
+ *                   description: Password to account
+ *                   example: SuperSecretPassword
+ *                 accessLevel:
+ *                   type: string
+ *                   description: Access level
+ *                   example: Developer
+ *       409:
+ *         description: Email is already registered
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: The error message
+ *                   example: Email is already registered.
  */
 
-app.get(userName, (req, res) => {
+app.post(registerUser, (req, res) => {
     User.find()
         .then(result => {
-            const user = result.find(element => element.email === 'johanna@mail.com')
+            const user = result.find(element => element.email === req.body.email)
             if (user) {
-                res.send({ name: user.name })
+                res.status(409)
+                res.send({ error: "Email is already registered." })
             } else {
-                res.status(401);
-                res.send({ name: false })
+                const newUser = new User({...req.body, accessLevel: "developer"})
+                newUser.save()
+                res.send(newUser)
             }
         })
         .catch(err => console.log(err))
-});
+})
+
+
+
 
 /**
  * @openapi
