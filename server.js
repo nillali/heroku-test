@@ -14,6 +14,7 @@ app.use(cors())
 const dbURI = process.env.dbURI
 const PORT = process.env.PORT || 3001
 const userName = process.env.userName
+const allUsers = process.env.allUsers
 const authorizeUser = process.env.authorizeUser
 const registerUser = process.env.registerUser
 
@@ -156,7 +157,7 @@ app.post(registerUser, (req, res) => {
                 res.status(409)
                 res.send({ error: "Email is already registered." })
             } else {
-                const newUser = new User({...req.body, accessLevel: "developer"})
+                const newUser = new User({ ...req.body, accessLevel: "developer" })
                 newUser.save()
                 res.send(newUser)
             }
