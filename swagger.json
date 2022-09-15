@@ -1,18 +1,16 @@
 {
-    "swaggerDefinition": {
-        "openapi": "3.0.0",
-        "info": {
-            "title": "OneSource Webservice REST API",
-            "version": "1.0.0"
-        },
-        "tags": [
-            {
-                "name": "users",
-                "description": "Operations about the users"
-            }
-        ]
+  "swaggerDefinition": {
+    "openapi": "3.0.0",
+    "info": {
+      "title": "OneSource Webservice REST API",
+      "version": "1.0.0"
     },
-    "apis": [
-        "./server.js"
+    "tags": [
+      {
+        "name": "users",
+        "description": "Operations about the users"
+      }
     ]
+  },
+  "apis": ["./server.js"]
 }

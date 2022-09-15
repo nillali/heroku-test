@@ -1,35 +1,36 @@
-const express = require('express')
-require('dotenv').config()
-const mongoose = require('mongoose')
-const cors = require('cors')
-const User = require('./models/user')
-const swaggerUi = require('swagger-ui-express');
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerOptions = require('./swagger.json');
-const { users } = require('./db')
+const express = require("express");
+require("dotenv").config();
+const mongoose = require("mongoose");
+const cors = require("cors");
+const User = require("./models/user");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerOptions = require("./swagger.json");
+const { users } = require("./db");
 const app = express();
 
-app.use(cors())
+app.use(cors());
 
-const dbURI = process.env.dbURI
-const PORT = process.env.PORT || 3001
-const userName = process.env.userName
-const allUsers = process.env.allUsers
-const authorizeUser = process.env.authorizeUser
-const registerUser = process.env.registerUser
+const dbURI = process.env.dbURI;
+const PORT = process.env.PORT || 3001;
+const userName = process.env.userName;
+const allUsers = process.env.allUsers;
+const authorizeUser = process.env.authorizeUser;
+const registerUser = process.env.registerUser;
 
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then((res) => {
-        app.listen(PORT, () => {
-            console.log(`Server running on port ${PORT}, and connected to db`)
-        });
-    })
-    .catch((err) => console.log(err))
+mongoose
+  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((res) => {
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}, and connected to db`);
+    });
+  })
+  .catch((err) => console.log(err));
 
 app.use(express.json());
 
 const swaggerDocument = swaggerJsDoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 /**
  * @openapi
@@ -81,24 +82,23 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
  */
 
 app.post(authorizeUser, (req, res) => {
-    User.find()
-        .then(result => {
-            const user = result.find(element => element.email === req.body.email)
-            if (user) {
-                if (user.pwd === req.body.pwd) {
-                    res.send(user)
-                } else {
-                    res.status(401)
-                    res.send({ error: "Password and email do not match." })
-                }
-            } else {
-                res.status(401)
-                res.send({ error: "Email not registered." })
-            }
-        })
-        .catch(err => console.log(err))
-})
-
+  User.find()
+    .then((result) => {
+      const user = result.find((element) => element.email === req.body.email);
+      if (user) {
+        if (user.pwd === req.body.pwd) {
+          res.send(user);
+        } else {
+          res.status(401);
+          res.send({ error: "Password and email do not match." });
+        }
+      } else {
+        res.status(401);
+        res.send({ error: "Email not registered." });
+      }
+    })
+    .catch((err) => console.log(err));
+});
 
 /**
  * @openapi
@@ -150,23 +150,20 @@ app.post(authorizeUser, (req, res) => {
  */
 
 app.post(registerUser, (req, res) => {
-    User.find()
-        .then(result => {
-            const user = result.find(element => element.email === req.body.email)
-            if (user) {
-                res.status(409)
-                res.send({ error: "Email is already registered." })
-            } else {
-                const newUser = new User({ ...req.body, accessLevel: "developer" })
-                newUser.save()
-                res.send(newUser)
-            }
-        })
-        .catch(err => console.log(err))
-})
-
-
-
+  User.find()
+    .then((result) => {
+      const user = result.find((element) => element.email === req.body.email);
+      if (user) {
+        res.status(409);
+        res.send({ error: "Email is already registered." });
+      } else {
+        const newUser = new User({ ...req.body, accessLevel: "developer" });
+        newUser.save();
+        res.send(newUser);
+      }
+    })
+    .catch((err) => console.log(err));
+});
 
 /**
  * @openapi
@@ -208,15 +205,17 @@ app.post(registerUser, (req, res) => {
  */
 
 app.get(allUsers, (req, res) => {
-    User.find()
-        .then((result) => {
-            const employees = result.map(employee => ({
-                id: employee.id, name: employee.name, email: employee.email, phone: employee.phone
-            }))
-            res.send(employees)
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+  User.find()
+    .then((result) => {
+      const employees = result.map((employee) => ({
+        id: employee.id,
+        name: employee.name,
+        email: employee.email,
+        phone: employee.phone,
+      }));
+      res.send(employees);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
-
