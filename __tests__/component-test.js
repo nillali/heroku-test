@@ -18,13 +18,13 @@ describe(`POST /api/v0/authorize`, () => {
     let server = null
     beforeAll(() => {
         mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-        server = app.listen(PORT, () => {
-            console.log(`Server running on port ${PORT}`)
-        });
+        server = app.listen(PORT)
       });
       
       afterAll( async () => {
+        console.log("In after all")
         await mongoose.disconnect()
+        await new Promise(resolve => setTimeout(resolve, 3000));
         await server.close()
       });
     test('Successful register', () => {
@@ -70,6 +70,18 @@ describe(`POST /api/v0/authorize`, () => {
 });
 
 // describe(`POST /api/v0/authorize`, () => {
+//     let server = null
+//     beforeAll(() => {
+//         mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+//         server = app.listen(PORT, () => {
+//             console.log(`Server running on port ${PORT}`)
+//         });
+//         });
+        
+//         afterAll( async () => {
+//         await mongoose.disconnect()
+//         await server.close()
+//         });
 //     test('Successful authorization', async () => {
 //         try {
 //             const res = await request(app)
