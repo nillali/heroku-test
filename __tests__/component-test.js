@@ -8,7 +8,7 @@ test('Multiplies two arguments', () => {
 
 // const request = require('supertest');
 // const assert = require('assert');
-// const { app, mongoose, server } = require("../server");
+// const app = require("../server");
 
 // afterAll(async() => {
 //     await server.close()
@@ -65,10 +65,10 @@ test('Multiplies two arguments', () => {
 //     });
 // });
 
-// describe(`POST ${process.env.registerUser}`, () => {
+// describe(`POST /api/v0/authorize`, () => {
 //     test('Successful register', () => {
 //         return request(app)
-//             .post(process.env.authorizeUser)
+//             .post('/api/v0/authorize')
 //             .expect('Content-Type', /json/)
 //             .send({
 //                 email: "testar@test.se",
@@ -92,10 +92,10 @@ test('Multiplies two arguments', () => {
 //     });
 //     test('Unsuccessful authorization', () => {
 //         return request(app)
-//             .post(process.env.authorizeUser)
+//             .post('/api/v0/authorize')
 //             .expect('Content-Type', /json/)
 //             .send({
-//                 email: "testar@test.se",
+//                 email: "testar@test.se" ,
 //                 pwd: "hejhej1"
 //             })
 //             .expect(401)
