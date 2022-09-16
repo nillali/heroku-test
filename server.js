@@ -13,9 +13,9 @@ app.use(cors())
 
 const dbURI = process.env.dbURI
 const PORT = process.env.PORT || 3001
-const userName = process.env.userName
 const authorizeUser = process.env.authorizeUser
 const registerUser = process.env.registerUser
+const allUsers = process.env.allUsers
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((res) => {
@@ -26,6 +26,10 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .catch((err) => console.log(err))
 
 app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.send({test: "working"})
+})
 
 const swaggerDocument = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -131,10 +135,6 @@ app.post(authorizeUser, (req, res) => {
  *                   type: string
  *                   description: Password to account
  *                   example: SuperSecretPassword
- *                 accessLevel:
- *                   type: string
- *                   description: Access level
- *                   example: Developer
  *       409:
  *         description: Email is already registered
  *         content:
@@ -219,3 +219,4 @@ app.get(allUsers, (req, res) => {
         });
 });
 
+module.exports = app
