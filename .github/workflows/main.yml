@@ -8,6 +8,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      dbURI: ${{secrets.dbURI}}
 
     strategy:
       matrix:
@@ -27,4 +29,3 @@ jobs:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: "one-source-integration-server" #Must be unique in Heroku
         heroku_email: "anna.toll@protonmail.com"
-        buildpack: heroku/nodejs
