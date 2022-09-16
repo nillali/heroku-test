@@ -13,6 +13,6 @@
         ]
     },
     "apis": [
-        "./server.js"
+        "./routes/api.js"
     ]
 }

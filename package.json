@@ -8,6 +8,7 @@
     "dev": "nodemon server.js",
     "dev-docker": "nodemon -L server.js",
     "test": "jest",
+    "test2": "jest  --detectOpenHandles",
     "componenttest": "jest",
     "integrationtest": "jest",
     "prepare": "husky install"
