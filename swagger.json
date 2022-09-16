@@ -13,6 +13,6 @@
         ]
     },
     "apis": [
-        "./routes/api.js"
+        "./routes/*.js"
     ]
 }
