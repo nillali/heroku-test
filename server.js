@@ -83,7 +83,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
  *                   example: Email not registered.
  */
 
-app.post(authorizeUser, (req, res) => {
+app.post('/api/v0/authorize', (req, res) => {
     User.find()
         .then(result => {
             const user = result.find(element => element.email === req.body.email)
