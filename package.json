@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
@@ -11,7 +12,8 @@
     "componenttest": "jest",
     "integrationtest": "jest",
     "prepare": "husky install",
-    "configure-husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\""
+    "configure-husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\"",
+    "lint": "eslint ./"
   },
   "repository": {
     "type": "git",
@@ -33,17 +35,13 @@
   },
   "devDependencies": {
     "eslint": "^8.23.1",
-    "eslint-plugin-jest": "^27.0.4",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.1",
     "jest": "^29.0.0",
-    "lint-staged": "^13.0.3",
-    "nodemon": "^2.0.19",
-    "prettier": "^2.7.1"
-  },
-  "lint-staged": {
-    "**/*.{js,jsx,json}": [
-      "prettier --write ."
-    ]
+    "nodemon": "^2.0.19"
   }
 }

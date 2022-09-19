@@ -1,22 +1,23 @@
-const express = require("express");
-require("dotenv").config();
-const mongoose = require("mongoose");
-const cors = require("cors");
-const User = require("./models/user");
-const swaggerUi = require("swagger-ui-express");
-const swaggerJsDoc = require("swagger-jsdoc");
-const swaggerOptions = require("./swagger.json");
-const { users } = require("./db");
+const express = require('express');
+require('dotenv').config();
+const mongoose = require('mongoose');
+const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+const User = require('./models/user');
+const swaggerOptions = require('./swagger.json');
+const { users } = require('./db');
+
 const app = express();
 
 app.use(cors());
 
-const dbURI = process.env.dbURI;
+const { dbURI } = process.env;
 const PORT = process.env.PORT || 3001;
-const userName = process.env.userName;
-const allUsers = process.env.allUsers;
-const authorizeUser = process.env.authorizeUser;
-const registerUser = process.env.registerUser;
+const { userName } = process.env;
+const { allUsers } = process.env;
+const { authorizeUser } = process.env;
+const { registerUser } = process.env;
 
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -30,7 +31,7 @@ mongoose
 app.use(express.json());
 
 const swaggerDocument = swaggerJsDoc(swaggerOptions);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 /**
  * @openapi
@@ -90,11 +91,11 @@ app.post(authorizeUser, (req, res) => {
           res.send(user);
         } else {
           res.status(401);
-          res.send({ error: "Password and email do not match." });
+          res.send({ error: 'Password and email do not match.' });
         }
       } else {
         res.status(401);
-        res.send({ error: "Email not registered." });
+        res.send({ error: 'Email not registered.' });
       }
     })
     .catch((err) => console.log(err));
@@ -155,9 +156,9 @@ app.post(registerUser, (req, res) => {
       const user = result.find((element) => element.email === req.body.email);
       if (user) {
         res.status(409);
-        res.send({ error: "Email is already registered." });
+        res.send({ error: 'Email is already registered.' });
       } else {
-        const newUser = new User({ ...req.body, accessLevel: "developer" });
+        const newUser = new User({ ...req.body, accessLevel: 'developer' });
         newUser.save();
         res.send(newUser);
       }
