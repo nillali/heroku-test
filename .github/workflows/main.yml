@@ -9,7 +9,7 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      dbURI: ${{secrets.dbURI}}
+      dbURI: ${{secrets.TEST_DB}}
 
     strategy:
       matrix:
@@ -23,6 +23,15 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
+    - run: npm test
+    - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "heroku-test-group" #Must be unique in Heroku
+        heroku_email: "anna.toll@protonmail.com"
+    env:
+      dbURI: ${{secrets.DB}}
+    steps:
     - run: npm test
     - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
       with:
