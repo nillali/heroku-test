@@ -20,6 +20,10 @@
     "rules": {
         "no-unused-vars": "off",
         "no-console": "off",
-        "no-undef": "off"
+        "no-undef": "off",
+        "no-promise-executor-return": "off",
+        "no-prototype-builtins": "off",
+        "import/extensions": "off",
+        "max-len": "off"
     }
 }

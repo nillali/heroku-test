@@ -9,6 +9,7 @@
     "dev": "nodemon server.js",
     "dev-docker": "nodemon -L server.js",
     "test": "jest",
+    "test2": "jest  --detectOpenHandles",
     "componenttest": "jest",
     "integrationtest": "jest",
     "prepare": "husky install",
@@ -42,6 +43,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.1",
     "jest": "^29.0.0",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "supertest": "^6.2.4"
   }
 }
