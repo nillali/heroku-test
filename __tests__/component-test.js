@@ -24,7 +24,7 @@ describe(`POST /api/v0/authorize`, () => {
       afterAll( async () => {
         console.log("In after all")
         await mongoose.disconnect()
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        // await new Promise(resolve => setTimeout(resolve, 3000));
         await server.close()
       });
     test('Successful register', () => {
