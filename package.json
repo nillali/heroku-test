@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
     "dev-docker": "nodemon -L server.js",
-    "test": "jest",
+    "test": "jest --verbose",
     "test2": "jest  --detectOpenHandles",
     "componenttest": "jest",
     "integrationtest": "jest",

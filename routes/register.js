@@ -55,18 +55,22 @@ const User = require('../models/user');
 
 routes.post('/', (req, res) => {
   User.find()
-    .then((result) => {
+    .then(async (result) => {
       const user = result.find((element) => element.email === req.body.email);
+      console.log(req.body);
       if (user) {
         res.status(409);
         res.send({ error: 'Email is already registered.' });
       } else {
         const newUser = new User({ ...req.body, accessLevel: 'developer' });
-        newUser.save();
+        await newUser.save();
         res.send(newUser);
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send();
+    });
 });
 
 module.exports = routes;
