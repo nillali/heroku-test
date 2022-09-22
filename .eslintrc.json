@@ -6,24 +6,21 @@
         "node": true
     },
     "extends": [
-        "plugin:react/recommended",
-        "airbnb"
+        "plugin:react/recommended"
     ],
     "overrides": [
     ],
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "ecmaVersion": "latest",
+        "sourceType": "module"
     },
     "plugins": [
         "react"
     ],
     "rules": {
-        "no-unused-vars": "off",
-        "no-console": "off",
-        "no-undef": "off",
-        "no-promise-executor-return": "off",
-        "no-prototype-builtins": "off",
-        "import/extensions": "off",
-        "max-len": "off"
+        "semi": ["error", "always"],
+        "quotes": ["error", "single"],
+        "react/prop-types": "off",
+        "react/react-in-jsx-scope": "off"
     }
 }
