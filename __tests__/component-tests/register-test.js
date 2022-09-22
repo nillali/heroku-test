@@ -1,8 +1,8 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const request = require('supertest');
-const app = require('../app');
-const User = require('../models/user');
+const app = require('../../app');
+const User = require('../../models/user');
 
 const { dbURI } = process.env;
 const randomNr = Math.floor(Math.random() * 1000000) + 1;

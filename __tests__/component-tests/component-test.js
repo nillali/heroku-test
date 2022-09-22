@@ -7,7 +7,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const request = require('supertest');
 const assert = require('assert');
-const app = require('../app');
+const app = require('../../app');
 
 const { dbURI } = process.env;
 const PORT = process.env.PORT || 3001;
@@ -20,7 +20,6 @@ describe('POST /api/v0/authorize', () => {
   });
 
   afterAll(async () => {
-    console.log('In after all');
     await mongoose.disconnect();
     await new Promise((resolve) => setTimeout(resolve, 3000));
     await server.close();
