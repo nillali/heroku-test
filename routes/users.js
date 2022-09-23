@@ -47,7 +47,7 @@ routes.get('/', (req, res) => {
   User.find()
     .then((result) => {
       const employees = result.map((employee) => ({
-        id: employee.id, name: employee.name, email: employee.email, phone: employee.phone,
+        id: employee.id, name: employee.name, email: employee.email, phone: employee.phone, image: employee.image,
       }));
       res.send(employees);
     })
