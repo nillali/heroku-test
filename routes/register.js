@@ -54,10 +54,12 @@ const User = require('../models/user');
  */
 
 routes.post('/', (req, res) => {
+    console.log(req.body);
   User.find()
     .then(async (result) => {
+        console.log('mockad array', result);
       const user = result.find((element) => element.email === req.body.email);
-      console.log(req.body);
+      console.log('user', user);
       if (user) {
         res.status(409);
         res.send({ error: 'Email is already registered.' });
