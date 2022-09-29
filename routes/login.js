@@ -1,6 +1,7 @@
 const routes = require('express').Router({});
 require('dotenv').config();
 const User = require('../models/user');
+const { generateJwtToken, checkCookie } = require('../jwt');
 
 // const authorizeUser = "/api/v0/authorize";
 
@@ -53,13 +54,30 @@ const User = require('../models/user');
  *                   example: Email not registered.
  */
 
-routes.post('/', (req, res) => {
+routes.post('/', checkCookie, (req, res) => {
   User.find()
     .then((result) => {
       const user = result.find((element) => element.email === req.body.email);
       if (user) {
         if (user.pwd === req.body.pwd) {
-          res.send(user);
+          res.status(200);
+          const tokenPayload = { 
+            name: user.name, 
+            accessLevel: user.accessLevel 
+          };
+          const accessToken = generateJwtToken(tokenPayload, '10m', 'access');
+          const refreshToken = generateJwtToken(tokenPayload, '1d', 'refresh');
+          res.cookie(
+              'jwt',
+              refreshToken, 
+              { 
+                  // httpOnly: true, 
+                  sameSite: 'None', 
+                  secure: true, 
+                  maxAge: 24 * 60 * 60 * 1000 
+              }
+          );
+          res.send({ accessToken: accessToken });
         } else {
           res.status(401);
           res.send({ error: 'Password and email do not match.' });

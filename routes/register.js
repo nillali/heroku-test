@@ -62,7 +62,7 @@ routes.post('/', (req, res) => {
         res.status(409);
         res.send({ error: 'Email is already registered.' });
       } else {
-        const newUser = new User({ ...req.body, accessLevel: 'developer' });
+        const newUser = new User({ ...req.body, accessLevel: 'undefined' });
         await newUser.save();
         res.send(newUser);
       }
