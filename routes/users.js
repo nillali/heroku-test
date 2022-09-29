@@ -46,13 +46,16 @@ const User = require('../models/user');
 routes.get('/', (req, res) => {
   User.find()
     .then((result) => {
+      console.log('mockad users', result);
       const employees = result.map((employee) => ({
-        id: employee.id, name: employee.name, email: employee.email, phone: employee.phone, image: employee.image,
+        id: employee.id, name: employee.name, email: employee.email, phone: employee.phone, accessLevel: employee.accessLevel, image: employee.image,
       }));
       res.send(employees);
+      console.log('employees', employees);
     })
     .catch((err) => {
       console.log(err);
+      res.status(500).send();
     });
 });
 
