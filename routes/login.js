@@ -65,8 +65,8 @@ routes.post('/', checkCookie, (req, res) => {
             name: user.name, 
             accessLevel: user.accessLevel 
           };
-          const accessToken = generateJwtToken(tokenPayload, '10m', 'access');
-          const refreshToken = generateJwtToken(tokenPayload, '1d', 'refresh');
+          const accessToken = generateJwtToken(tokenPayload, 'access');
+          const refreshToken = generateJwtToken(tokenPayload, 'refresh');
           res.cookie(
               'jwt',
               refreshToken, 
