@@ -17,6 +17,7 @@ describe('POST /api/v0/authorize', () => {
   beforeAll(() => {
     mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
     server = app.listen(PORT);
+    jest.setTimeout(10000);
   });
 
   afterAll(async () => {
