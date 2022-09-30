@@ -1,7 +1,7 @@
 const routes = require('express').Router({});
 require('dotenv').config();
 const User = require('../models/user');
-const { generateJwtToken, checkCookie } = require('../jwt');
+const { generateJwtToken, checkCookie, cookieSettings } = require('../jwt');
 
 // const authorizeUser = "/api/v0/authorize";
 
@@ -70,12 +70,7 @@ routes.post('/', checkCookie, (req, res) => {
           res.cookie(
               'jwt',
               refreshToken, 
-              { 
-                  // httpOnly: true, 
-                  sameSite: 'None', 
-                  secure: true, 
-                  maxAge: 24 * 60 * 60 * 1000 
-              }
+              cookieSettings
           );
           res.send({ accessToken: accessToken });
         } else {

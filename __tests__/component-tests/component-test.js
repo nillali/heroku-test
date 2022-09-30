@@ -28,29 +28,21 @@ describe('POST /api/v0/authorize', () => {
     .post('/api/v0/authorize')
     .expect('Content-Type', /json/)
     .send({
-      email: 'testar@test.se',
-      pwd: 'hejhej',
+      email: 'anna@mail.com',
+      pwd: '123',
     })
     .expect(200)
     .then((res) => {
-      assert(res.body.hasOwnProperty('name'), true);
-      assert(typeof res.body.name, 'string');
-      assert(res.body.hasOwnProperty('email'), true);
-      assert(typeof res.body.email, 'string');
-      assert(res.body.hasOwnProperty('phone'), true);
-      assert(typeof res.body.phone, 'string');
-      assert(res.body.hasOwnProperty('pwd'), true);
-      assert(typeof res.body.phone, 'string');
-      assert(res.body.hasOwnProperty('accessLevel'), true);
-      assert(typeof res.body.accessLevel, 'string');
-      assert(Object.keys(res.body).length, 5);
+      assert(res.body.hasOwnProperty('accessToken'), true);
+      assert(typeof res.body.accessToken, 'string');
+      assert(Object.keys(res.body).length, 1);
     }));
   test('Unsuccessful authorization', () => request(app)
     .post('/api/v0/authorize')
     .expect('Content-Type', /json/)
     .send({
-      email: 'testar@test.se',
-      pwd: 'hejhej1',
+      email: 'anna@mail.com',
+      pwd: '1234',
     })
     .expect(401)
     .then((res) => {

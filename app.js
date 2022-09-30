@@ -12,7 +12,14 @@ const loginRoute = require('./routes/login.js');
 
 const app = express();
 
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(cors({ 
+    credentials: true, 
+    origin: [
+        'http://localhost:3000',
+        'https://fe-one-source-v3.herokuapp.com',
+        'https://one-source-integration-app.herokuapp.com'
+    ]
+}));
 app.use(express.json());
 app.use(cookieparser());
 

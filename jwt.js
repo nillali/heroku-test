@@ -30,8 +30,15 @@ const generateJwtToken = (user, expirationString, type) => {
 
 };
 
+const cookieSettings = {
+    // httpOnly: true, 
+    sameSite: 'None', 
+    secure: true, 
+    maxAge: 24 * 60 * 60 * 1000 
+};
+
 
 // header:
 // Authorization: Bearer <token>
 
-module.exports = { authenticateToken, generateJwtToken, checkCookie };
+module.exports = { authenticateToken, generateJwtToken, checkCookie, cookieSettings };

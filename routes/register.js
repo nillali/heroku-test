@@ -1,6 +1,7 @@
 const routes = require('express').Router({});
 require('dotenv').config();
 const User = require('../models/user');
+const { generateJwtToken, checkCookie, cookieSettings } = require('../jwt');
 
 // const registerUser = "/api/v0/register";
 
@@ -53,20 +54,31 @@ const User = require('../models/user');
  *                   example: Email is already registered.
  */
 
-routes.post('/', (req, res) => {
+routes.post('/', checkCookie, (req, res) => {
     console.log(req.body);
   User.find()
     .then(async (result) => {
-        console.log('mockad array', result);
+        // console.log('mockad array', result);
       const user = result.find((element) => element.email === req.body.email);
-      console.log('user', user);
+      // console.log('user', user);
       if (user) {
         res.status(409);
         res.send({ error: 'Email is already registered.' });
       } else {
-        const newUser = new User({ ...req.body, accessLevel: 'undefined' });
+        const newUser = new User({ ...req.body, accessLevel: 'not-set' });
         await newUser.save();
-        res.send(newUser);
+        const tokenPayload = { 
+          name: newUser.name, 
+          accessLevel: newUser.accessLevel 
+        };
+        const accessToken = generateJwtToken(tokenPayload, '10m', 'access');
+        const refreshToken = generateJwtToken(tokenPayload, '1d', 'refresh');
+        res.cookie(
+            'jwt',
+            refreshToken,
+            cookieSettings
+        );
+        res.send({ accessToken: accessToken });
       }
     })
     .catch((err) => {

@@ -35,6 +35,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       dbURI: ${{secrets.DB}}
+      ACCESS_TOKEN_SECRET: ${{secrets.ACCESS_TOKEN_SECRET}}
+      REFRESH_TOKEN_SECRET: ${{secrets.REFRESH_TOKEN_SECRET}}
 
     strategy:
       matrix:
