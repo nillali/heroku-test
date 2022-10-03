@@ -5,6 +5,7 @@ const swaggerJsDoc = require('swagger-jsdoc');
 const cookieparser = require('cookie-parser');
 const swaggerOptions = require('./swagger.json');
 const { authenticateToken, generateJwtToken } = require('./jwt');
+const jwt = require('jsonwebtoken');
 
 const registerRoute = require('./routes/register.js');
 const userRoute = require('./routes/users.js');
@@ -52,16 +53,24 @@ app.get('/api/v0/logout', (req, res) => {
 });
 
 app.get('/api/v0/refresh', (req, res) => {
-    if (req.cookies?.jwt) {
-
+    if (!req.cookies?.jwt) {
+        res.status(401);
+    } else {
         const refreshToken = req.cookies.jwt;
+        console.log('in refreshtoken');
         console.log(refreshToken);
 
         jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
             if (err) {
                 res.status(406);
             } else {
-                const accessToken = generateJwtToken(decoded, '10m', 'access');
+                console.log(decoded);
+                const tokenPayload = {
+                    name: decoded.name,
+                    accessLevel: decoded.accessLevel
+                };
+                const accessToken = generateJwtToken(tokenPayload, 'access');
+                console.log(accessToken);
                 res.status(200);
                 res.send({ accessToken: accessToken });
             }

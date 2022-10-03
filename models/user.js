@@ -20,7 +20,7 @@ const userSchema = new Schema({
     required: true,
   },
   accessLevel: {
-    type: String,
+    type: {},
     required: true,
   },
   image: {

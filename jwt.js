@@ -25,7 +25,7 @@ const generateJwtToken = (user, type) => {
     if (type === 'access') {
         return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m' });
     } else {
-        return token = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
+        return token = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '12h' });
     }
 
 };
