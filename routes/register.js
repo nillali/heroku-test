@@ -65,7 +65,7 @@ routes.post('/', checkCookie, (req, res) => {
         res.status(409);
         res.send({ error: 'Email is already registered.' });
       } else {
-        const newUser = new User({ ...req.body, accessLevel: 'not-set' });
+        const newUser = new User({ ...req.body, accessLevel: [] });
         await newUser.save();
         const tokenPayload = { 
           name: newUser.name, 
