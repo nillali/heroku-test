@@ -39,7 +39,6 @@ describe('POST /api/v0/register', () => {
 
   it('Should not register empty user', async () => {
     mockingoose(User).toReturn([], 'find');
-    // mockingoose(User).toReturn(new Error(), 'save');
 
     return request(app)
       .post('/api/v0/register')

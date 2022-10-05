@@ -1,8 +1,3 @@
-const testFunction = (a, b) => a * b;
-
-test('Multiplies two arguments', () => {
-    expect(testFunction(2, 3)).toBe(6);
-});
 require('dotenv').config();
 const mockingoose = require('mockingoose');
 const request = require('supertest');
@@ -49,13 +44,4 @@ describe('GET /api/v0/users', () => {
                 assert(employee === undefined);
             })
     });
-
-    // //     it('Should not register empty user', async () => {
-    // //         mockingoose(User).toReturn([], 'find');
-
-    // //         return request(app)
-    // //             .post('/api/v0/register')
-    // //             .send({})
-    // //             .expect(500)
-    // //     });
 });
