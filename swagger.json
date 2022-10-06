@@ -4,10 +4,9 @@
     "info": {
       "title": "OneSource Webservice REST API",
       "version": "1.0.0"
-    },
-    "apis": [
-        "./routes/*.js"
-    ]
+    }
   },
-  "apis": ["./server.js"]
+  "apis": [
+    "./routes/*.js"
+  ]
 }
