@@ -20,6 +20,9 @@ Add this code to your .env file:
 
 ```
 dbURI=<your MongoDB connection string>
+PORT = <Port>
+ACCESS_TOKEN_SECERET = <Your jwt access token>
+REFRESH_TOKEN_SECRET = <Your jwt refresh token>
 ```
 
 ### Tester
@@ -30,9 +33,9 @@ npm componenttest # Component test
 npm integrationtest # Integration test
 ```
 
-### Docker
+### ESLint
 
 ```bash
-docker build -t <image-name> .
-docker run --name <container-name> <image-name>
+npm run lint
 ```
+
