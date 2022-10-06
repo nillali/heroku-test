@@ -14,6 +14,7 @@ touch .env
 npm install
 npm start
 ```
+## Onboarding
 
 Add this code to your .env file:
 
