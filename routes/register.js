@@ -65,14 +65,14 @@ routes.post('/', checkCookie, (req, res) => {
         res.status(409);
         res.send({ error: 'Email is already registered.' });
       } else {
-        const newUser = new User({ ...req.body, accessLevel: 'not-set' });
+        const newUser = new User({ ...req.body, accessLevel: [] });
         await newUser.save();
         const tokenPayload = { 
           name: newUser.name, 
           accessLevel: newUser.accessLevel 
         };
-        const accessToken = generateJwtToken(tokenPayload, '10m', 'access');
-        const refreshToken = generateJwtToken(tokenPayload, '1d', 'refresh');
+        const accessToken = generateJwtToken(tokenPayload, 'access');
+        const refreshToken = generateJwtToken(tokenPayload, 'refresh');
         res.cookie(
             'jwt',
             refreshToken,

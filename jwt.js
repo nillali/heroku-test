@@ -20,18 +20,18 @@ const checkCookie = (req, res, next) => {
 };
 
 
-const generateJwtToken = (user, expirationString, type) => {
+const generateJwtToken = (user, type) => {
 
     if (type === 'access') {
-        return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: expirationString });
+        return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m' });
     } else {
-        return token = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: expirationString });
+        return token = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '12h' });
     }
 
 };
 
 const cookieSettings = {
-    // httpOnly: true, 
+    httpOnly: true, 
     sameSite: 'None', 
     secure: true, 
     maxAge: 24 * 60 * 60 * 1000 
