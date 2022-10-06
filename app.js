@@ -14,11 +14,12 @@ const loginRoute = require('./routes/login.js');
 const refreshRoute = require('./routes/refresh');
 const logoutRoute = require('./routes/logout');
 const adminRoute = require('./routes/admin');
+const healthCheckRoute = require('./routes/healthcheck.js');
 
 const app = express();
 
-app.use(cors({ 
-    credentials: true, 
+app.use(cors({
+    credentials: true,
     origin: [
         'http://localhost:3000',
         'https://fe-one-source-v3.herokuapp.com',
@@ -37,5 +38,6 @@ app.use('/api/v0/authorize', loginRoute);
 app.use('/api/v0/refresh', refreshRoute);
 app.use('/api/v0/logout', logoutRoute);
 app.use('/api/v0/admin', adminRoute);
+app.use('/health-check', healthCheckRoute);
 
 module.exports = app;
